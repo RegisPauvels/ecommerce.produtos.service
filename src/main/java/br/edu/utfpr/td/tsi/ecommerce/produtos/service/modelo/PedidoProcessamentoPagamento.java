@@ -7,6 +7,16 @@ public class PedidoProcessamentoPagamento {
 	private Produto produto;
 	private String numeroCartaoCredito;
 	private int quantidade;
+	
+	private String compraId;
+	
+	public String getCompraId() {
+		return compraId;
+	}
+
+	public void setCompraId(String compraId) {
+		this.compraId = compraId;
+	}
 
 	public Endereco getEndereco() {
 		return endereco;

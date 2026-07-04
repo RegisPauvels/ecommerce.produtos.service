@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.google.gson.Gson;
@@ -15,6 +16,9 @@ import br.edu.utfpr.td.tsi.ecommerce.produtos.service.modelo.PedidoProcessamento
 
 @Component
 public class Listener {
+	
+	@Autowired
+	private Publisher publisher;
 	
 	private Logger logger = LoggerFactory.getLogger(Listener.class);
 
@@ -30,6 +34,8 @@ public class Listener {
         try {
 
             simularAtualizacaoEstoque(pedido);
+            
+            publisher.compraConcluida(pedido);
 
             channel.basicAck(deliveryTag, false);
 
